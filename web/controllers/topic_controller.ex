@@ -34,7 +34,7 @@ defmodule Discuss.TopicController do
   end
 
   def update(conn, %{"id" => topic_id, "topic" => topic}) do
-    old_topic = Repo.get(Topic, topic_id)
+    old_topic = Repo.get!(Topic, topic_id)
 
     old_topic
     |> Topic.changeset(topic)
@@ -47,5 +47,15 @@ defmodule Discuss.TopicController do
       {:error, changeset} ->
         render conn, "edit.html", changeset: changeset, topic: old_topic
     end
+  end
+
+  def delete(conn, %{"id" => topic_id}) do
+    Topic
+    |> Repo.get!(topic_id) 
+    |> Repo.delete!
+
+    conn
+    |> put_flash(:info, "Topic Delete")
+    |> redirect(to: topic_path(conn, :index))
   end
 end
