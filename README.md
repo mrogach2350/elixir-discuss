@@ -1,5 +1,7 @@
 # Discuss
 
+To Run with .env: `source .env && mix phoenix.server`
+
 To start your Phoenix app:
 
   * Install dependencies with `mix deps.get`

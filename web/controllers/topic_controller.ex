@@ -4,6 +4,7 @@ defmodule Discuss.TopicController do
   alias Discuss.Topic
 
   def index(conn, _params) do
+    IO.inspect(conn.assigns)
     topics = Repo.all(Topic)
     render conn, "index.html", topics: topics
   end
@@ -51,7 +52,7 @@ defmodule Discuss.TopicController do
 
   def delete(conn, %{"id" => topic_id}) do
     Topic
-    |> Repo.get!(topic_id) 
+    |> Repo.get!(topic_id)
     |> Repo.delete!
 
     conn
